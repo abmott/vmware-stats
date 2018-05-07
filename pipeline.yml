@@ -1,0 +1,34 @@
+resource_types:
+- name: ubuntu
+  type: docker-image
+  source:
+    repository: docker.prod.pdc.digital.csaa-insurance.aaa.com/ubuntu-ruby-aws
+    tag: latest
+
+
+jobs:
+- name: esx_stats
+  plan:
+  - get: digital-ssl-status-repo
+    trigger: true
+  - get: 24h
+    trigger: true
+  - task: current-certs
+    file: vmware-stats-repo/ci/tasks/get_esx_info/task.yml
+    params:
+      DATADOG_API_KEY: {{datadog_api_key}}
+      ESX_HOST: {{esx_host}}
+      ESX_USER: {{esx_user}}
+      ESX_PASSWORD: {{esx_password}}
+
+
+resources:
+- name: vmware-stats-repo
+  type: git
+  source:
+    uri: ssh://git@ssh.github.com:443/aaa-ncnu-ie/vmware_stats.git
+    branch: master
+    private_key: {{github_private_key}}
+- name: 24h
+  type: time
+  source: {interval: 24h}
