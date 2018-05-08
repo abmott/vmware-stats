@@ -1,5 +1,5 @@
 require 'rbvmomi'
-#require 'alchemist/geospatial'
+
 
 #size Methods
 def bytetoGB(sizein)

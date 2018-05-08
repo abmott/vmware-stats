@@ -3,17 +3,18 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: docker.prod.pdc.digital.csaa-insurance.aaa.com/ubuntu-ruby-aws
+    repository: docker.prod.pdc.digital.csaa-insurance.aaa.com/ruby-rbvmomi
     tag: latest
 
 inputs:
-  - name: digital-ssl-status-repo
+  - name: vmware-status-repo
 
 run:
-  path: digital-ssl-status-repo/ci/tasks/get_ssl_info/get_cert_status.rb
+  path: vmware-status-repo/ci/tasks/get_esx_info/vmware-metrics.rb
 
 params:
   params:
-    OPSMAN_USERNAME:
-    OPSMAN_PASSWORD:
-    OPSMAN_URI:
+    DATADOG_API_KEY:
+    ESX_HOST:
+    ESX_USER:
+    ESX_PASSWORD:

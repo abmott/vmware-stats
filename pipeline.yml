@@ -2,18 +2,18 @@ resource_types:
 - name: ubuntu
   type: docker-image
   source:
-    repository: docker.prod.pdc.digital.csaa-insurance.aaa.com/ubuntu-ruby-aws
+    repository: docker.prod.pdc.digital.csaa-insurance.aaa.com/ruby-rbvmomi
     tag: latest
 
 
 jobs:
 - name: esx_stats
   plan:
-  - get: digital-ssl-status-repo
+  - get: vmware-status-repo
     trigger: true
-  - get: 24h
+  - get: 5m
     trigger: true
-  - task: current-certs
+  - task: vmware-stats-to-datadog
     file: vmware-stats-repo/ci/tasks/get_esx_info/task.yml
     params:
       DATADOG_API_KEY: {{datadog_api_key}}
@@ -29,6 +29,6 @@ resources:
     uri: ssh://git@ssh.github.com:443/aaa-ncnu-ie/vmware_stats.git
     branch: master
     private_key: {{github_private_key}}
-- name: 24h
+- name: 5m
   type: time
-  source: {interval: 24h}
+  source: {interval: 5m
