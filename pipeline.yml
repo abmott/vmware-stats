@@ -11,7 +11,7 @@ jobs:
   plan:
   - get: vmware-stats-repo
     trigger: true
-  - get: 5hr
+  - get: 15m
     trigger: true
   - task: vmware-stats-to-datadog
     file: vmware-stats-repo/ci/tasks/get_esx_info/task.yml
@@ -29,6 +29,6 @@ resources:
     uri: ssh://git@ssh.github.com:443/aaa-ncnu-ie/vmware_stats.git
     branch: master
     private_key: {{github_private_key}}
-- name: 5hr
+- name: 15m
   type: time
-  source: {interval: 5h}
+  source: {interval: 15m}
