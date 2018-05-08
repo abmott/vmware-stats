@@ -31,4 +31,4 @@ resources:
     private_key: {{github_private_key}}
 - name: 5hr
   type: time
-  source: {interval: 5hr}
+  source: {interval: 5h}
