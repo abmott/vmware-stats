@@ -9,7 +9,7 @@ resource_types:
 jobs:
 - name: esx_stats
   plan:
-  - get: vmware-status-repo
+  - get: vmware-stats-repo
     trigger: true
   - get: 5m
     trigger: true
@@ -31,4 +31,4 @@ resources:
     private_key: {{github_private_key}}
 - name: 5m
   type: time
-  source: {interval: 5m
+  source: {interval: 5m}
