@@ -7,10 +7,10 @@ image_resource:
     tag: latest
 
 inputs:
-  - name: vmware-status-repo
+  - name: vmware-stats-repo
 
 run:
-  path: vmware-status-repo/ci/tasks/get_esx_info/vmware-metrics.rb
+  path: vmware-stats-repo/ci/tasks/get_esx_info/vmware-metrics.rb
 
 params:
   params:
