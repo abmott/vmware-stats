@@ -32,10 +32,11 @@ end
 
 pcf_envs.each do |pcf_env|
 puts "starting to gather for #{pcf_env}"
-puts "#{pcf_env.upcase}_ESX_HOST"
+esx_host = "#{pcf_env.upcase}_ESX_HOST"
+puts "#{ENV["#{esx_host}"]}"
 ##Connect to vCenter Variables
 v = RbVmomi::VIM
-vim = v.connect host: "#{ENV["#{pcf_env.upcase}_ESX_HOST"]}", insecure: true, user: "#{ENV["#{pcf_env.upcase}_ESX_USER"]}", password: "#{ENV["#{pcf_env.upcase}_ESX_PASSWORD"]}"
+vim = v.connect host: "#{ENV["#{esx_host}"]}", insecure: true, user: "#{ENV["#{pcf_env.upcase}_ESX_USER"]}", password: "#{ENV["#{pcf_env.upcase}_ESX_PASSWORD"]}"
 dc = vim.serviceInstance.find_datacenter path="Digital Services"
 
 #pull ESX Host stats
