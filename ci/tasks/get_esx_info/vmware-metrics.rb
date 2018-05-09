@@ -32,7 +32,7 @@ end
 
 pcf_envs.each do |pcf_env|
 puts "starting to gather for #{pcf_env}"
-puts "#{ENV["#{pcf_env.upcase}_ESX_HOST"]}"
+puts "#{pcf_env.upcase}_ESX_HOST"
 ##Connect to vCenter Variables
 v = RbVmomi::VIM
 vim = v.connect host: "#{ENV["#{pcf_env.upcase}_ESX_HOST"]}", insecure: true, user: "#{ENV["#{pcf_env.upcase}_ESX_USER"]}", password: "#{ENV["#{pcf_env.upcase}_ESX_PASSWORD"]}"
