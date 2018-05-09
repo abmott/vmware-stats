@@ -25,6 +25,7 @@ def datadogmetric(label1, label2, host, metric, env)
 end
 
 pcf_envs = ["sandbox", "gdc", "pdc"]
+puts "#{ENV["#{pcf_env.upcase}_ESX_HOST"]}"
 pcf_envs.each do |pcf_env|
 puts "starting to gather for #{pcf_env}"
 puts "#{ENV["#{pcf_env.upcase}_ESX_HOST"]}"
