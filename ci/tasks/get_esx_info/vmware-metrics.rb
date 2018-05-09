@@ -34,7 +34,7 @@ pcf_envs.each do |pcf_env|
 puts "starting to gather for #{pcf_env}"
 esx_host = "#{pcf_env.upcase}_ESX_HOST"
 puts esx_host
-puts "#{ENV['"#{esx_host}"']}"
+puts "#{ENV['sandbox_esx_host']}"
 end
 ##Connect to vCenter Variables
 #v = RbVmomi::VIM
