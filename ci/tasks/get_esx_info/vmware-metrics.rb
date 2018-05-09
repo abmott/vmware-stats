@@ -74,9 +74,16 @@ end
 end
 
 #free space of Datastore (single datastore)
+pcf_envs.each do |pcf_env|
+puts "starting to gather for #{pcf_env}"
+
+v = RbVmomi::VIM
+vim = v.connect host: "#{eval("#{pcf_env}_esx_host")}", insecure: true, user: "#{eval("#{pcf_env}_esx_user")}", password: "#{eval("#{pcf_env}_esx_password")}"
+dc = vim.serviceInstance.find_datacenter path="#{eval("#{pcf_env}_esx_datacenter")}"
+
 puts "===================================="
-ds_array = ['GDC-CloudFoundry-VMAX1-01', 'GDC-CloudFoundry-VMAX1-02']
-ds_array.each do |datastore|
+ds_array = "#{eval("#{pcf_env}_datastores")}"
+ds_array.split(',').each do |datastore|
   puts "------------------------------------"
   ds = dc.find_datastore name = "#{datastore}"
  puts "#{datastore}"
