@@ -71,6 +71,7 @@ dc.hostFolder.children.first.host.each do |host|
   datadogmetric("memory", "percent_free", host.summary.config.name.downcase, memfreeperc, "#{eval("#{pcf_env}_pcf_tag")}")
   puts "posting metrics to datadog completed"
 end
+end
 
 #free space of Datastore (single datastore)
 puts "===================================="
@@ -90,4 +91,5 @@ ds_array.each do |datastore|
  datadogmetric("storage", "used", datastore, dsused, "#{eval("#{pcf_env}_pcf_tag")}")
  datadogmetric("storage", "free", datastore, dsfree, "#{eval("#{pcf_env}_pcf_tag")}")
  puts "posting metrics to datadog completed"
+end
 end
