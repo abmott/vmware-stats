@@ -35,6 +35,7 @@ puts "starting to gather for #{pcf_env}"
 esx_host = "#{pcf_env.upcase}_ESX_HOST"
 puts esx_host
 puts "#{ENV['SANDBOX_ESX_HOST']}"
+puts "#{ENV['SANDBOX_ESX_HOST']}"
 end
 ##Connect to vCenter Variables
 #v = RbVmomi::VIM
