@@ -27,7 +27,7 @@ end
 pcf_envs = ["sandbox", "gdc", "pdc"]
 
 pcf_envs.each do |test|
-  puts "#{ENV["#{pcf_envs.upcase}_ESX_HOST"]}"
+  puts "#{ENV["#{pcf_envs.map(&:upcase)}_ESX_HOST"]}"
 end
 
 pcf_envs.each do |pcf_env|
