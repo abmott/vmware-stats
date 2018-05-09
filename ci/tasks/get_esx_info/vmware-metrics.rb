@@ -24,9 +24,13 @@ def datadogmetric(label1, label2, host, metric, env)
              https://app.datadoghq.com/api/v1/series?api_key=#{ENV['DATADOG_API_KEY']}`
 end
 
+pcf_envs = ["sandbox", "gdc", "pdc"]
+pcf_envs.each do |pcf_env|
+puts "starting to gather for #{pcf_env}"
+
 ##Connect to vCenter Variables
 v = RbVmomi::VIM
-vim = v.connect host: "#{ENV['ESX_HOST']}", insecure: true, user: "#{ENV['ESX_USER']}", password: "#{ENV['ESX_PASSWORD']}"
+vim = v.connect host: "#{ENV["#{pcf_env.upcase}_ESX_HOST"]}", insecure: true, user: "#{ENV["#{pcf_env.upcase}_ESX_USER"]}", password: "#{ENV["#{pcf_env.upcase}_ESX_PASSWORD"]}"
 dc = vim.serviceInstance.find_datacenter path="Digital Services"
 
 #pull ESX Host stats
@@ -55,16 +59,16 @@ dc.hostFolder.children.first.host.each do |host|
   puts "Memory Used: #{memusedperc} %"
   puts "Memory Free: #{memfreeperc} %"
   puts "posting metrics to datadog started"
-  datadogmetric("cpu", "capacity", host.summary.config.name.downcase, cpucapacity, "tent")
-  datadogmetric("cpu", "used", host.summary.config.name.downcase, cpuused, "tent")
-  datadogmetric("cpu", "free", host.summary.config.name.downcase, cpufree, "tent")
-  datadogmetric("cpu", "percent_used", host.summary.config.name.downcase, cpuusedperc, "tent")
-  datadogmetric("cpu", "percent_free", host.summary.config.name.downcase, cpufreeperc, "tent")
-  datadogmetric("memory", "capacity", host.summary.config.name.downcase, memcap, "tent")
-  datadogmetric("memory", "used", host.summary.config.name.downcase, memuse, "tent")
-  datadogmetric("memory", "free", host.summary.config.name.downcase, memfree, "tent")
-  datadogmetric("memory", "percent_used", host.summary.config.name.downcase, memusedperc, "tent")
-  datadogmetric("memory", "percent_free", host.summary.config.name.downcase, memfreeperc, "tent")
+  datadogmetric("cpu", "capacity", host.summary.config.name.downcase, cpucapacity, "#{eval("#{pcf_env}_pcf_tag")}")
+  datadogmetric("cpu", "used", host.summary.config.name.downcase, cpuused, "#{eval("#{pcf_env}_pcf_tag")}")
+  datadogmetric("cpu", "free", host.summary.config.name.downcase, cpufree, "#{eval("#{pcf_env}_pcf_tag")}")
+  datadogmetric("cpu", "percent_used", host.summary.config.name.downcase, cpuusedperc, "#{eval("#{pcf_env}_pcf_tag")}")
+  datadogmetric("cpu", "percent_free", host.summary.config.name.downcase, cpufreeperc, "#{eval("#{pcf_env}_pcf_tag")}")
+  datadogmetric("memory", "capacity", host.summary.config.name.downcase, memcap, "#{eval("#{pcf_env}_pcf_tag")}")
+  datadogmetric("memory", "used", host.summary.config.name.downcase, memuse, "#{eval("#{pcf_env}_pcf_tag")}")
+  datadogmetric("memory", "free", host.summary.config.name.downcase, memfree, "#{eval("#{pcf_env}_pcf_tag")}")
+  datadogmetric("memory", "percent_used", host.summary.config.name.downcase, memusedperc, "#{eval("#{pcf_env}_pcf_tag")}")
+  datadogmetric("memory", "percent_free", host.summary.config.name.downcase, memfreeperc, "#{eval("#{pcf_env}_pcf_tag")}")
   puts "posting metrics to datadog completed"
 end
 
@@ -82,8 +86,8 @@ ds_array.each do |datastore|
  puts "Datastore Used: #{dsused} GB"
  puts "Datastore Free: #{dsfree} GB"
  puts "posting metics to datadog started"
- datadogmetric("storage", "capacity", datastore, dscapacity, "tent")
- datadogmetric("storage", "used", datastore, dsused, "tent")
- datadogmetric("storage", "free", datastore, dsfree, "tent")
+ datadogmetric("storage", "capacity", datastore, dscapacity, "#{eval("#{pcf_env}_pcf_tag")}")
+ datadogmetric("storage", "used", datastore, dsused, "#{eval("#{pcf_env}_pcf_tag")}")
+ datadogmetric("storage", "free", datastore, dsfree, "#{eval("#{pcf_env}_pcf_tag")}")
  puts "posting metrics to datadog completed"
 end

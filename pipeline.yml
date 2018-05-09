@@ -17,10 +17,24 @@ jobs:
     file: vmware-stats-repo/ci/tasks/get_esx_info/task.yml
     params:
       DATADOG_API_KEY: {{datadog_api_key}}
-      ESX_HOST: {{esx_host}}
-      ESX_USER: {{esx_user}}
-      ESX_PASSWORD: {{esx_password}}
-
+      SANDBOX_ESX_HOST: {{sandbox_esx_host}}
+      SANDBOX_ESX_USER: {{sandbox_esx_user}}
+      SANDBOX_ESX_PASSWORD: {{sandbox_esx_password}}
+      SANDBOX_ESX_DATACENTER: {{sandbox_esx_datacenter}}
+      SANDBOX_PCF_TAG: {{sandbox_pcf_tag}}
+      SANDBOX_DATASTORES: {{sandbox_datastores}}
+      GDC_ESX_HOST: {{gdc_esx_host}}
+      GDC_ESX_USER: {{gdc_esx_user}}
+      GDC_ESX_PASSWORD: {{gdc_esx_password}}
+      GDC_ESX_DATACENTER: {{gdc_esx_datacenter}}
+      GDC_PCF_TAG: {{gdc_pcf_tag}}
+      GDC_DATASTORES: {{gdc_datastores}}
+      PDC_ESX_HOST: {{pdc_esx_host}}
+      PDC_ESX_USER: {{pdc_esx_user}}
+      PDC_ESX_PASSWORD: {{pdc_esx_password}}
+      PDC_ESX_DATACENTER: {{pdc_esx_datacenter}}
+      PDC_PCF_TAG: {{pdc_pcf_tag}}
+      PDC_DATASTORES: {{pdc_datastores}}
 
 resources:
 - name: vmware-stats-repo
