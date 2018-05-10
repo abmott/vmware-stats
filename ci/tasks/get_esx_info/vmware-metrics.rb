@@ -71,8 +71,7 @@ end
 #free space of Datastore (single datastore)
 puts "===================================="
 ds_array = "#{ENV['DATASTORES']}"
-ds_array.split("''")
-ds_array.each do |datastore|
+ds_array.split(',').each do |datastore|
   puts "------------------------------------"
   ds = dc.find_datastore name = "#{datastore}"
  puts "#{datastore}"
