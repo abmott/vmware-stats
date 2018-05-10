@@ -46,8 +46,8 @@ dc.hostFolder.children.each do |cluster|
   memcap = bytetoGB(host.hardware.memorySize.to_i)
   memuse = MBtoGB(host.summary.quickStats.overallMemoryUsage.to_i)
   memfree = memcap - memuse
-  memfreeperc = ((memuse.to_f/memcap.to_f)*100).round(2)
-  memusedperc = (100-((memuse.to_f/memcap.to_f)*100)).round(2)
+  memusedperc = ((memuse.to_f/memcap.to_f)*100).round(2)
+  memfreeperc = (100-((memuse.to_f/memcap.to_f)*100)).round(2)
   puts "CPU Capacity: #{cpucapacity} GHz"
   puts "CPU Used: #{cpuused} GHz"
   puts "CPU Free: #{cpufree} GHz"
