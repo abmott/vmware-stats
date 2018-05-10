@@ -30,7 +30,11 @@ vim = v.connect host: "#{ENV['ESX_HOST']}", insecure: true, user: "#{ENV['ESX_US
 dc = vim.serviceInstance.find_datacenter path="#{ENV['ESX_DATACENTER']}"
 
 #pull ESX Host stats
-dc.hostFolder.children.first.host.each do |host|
+dc.hostFolder.children.each do |cluster|
+#  puts "-----------------------------"
+  cluster.host.each do |host|
+    puts host.name
+#dc.hostFolder.children.first.host.each do |host|
   puts "-----------------------------"
   puts host.summary.config.name.downcase
   puts "Logical Processors: #{host.hardware.cpuInfo.numCpuCores.to_i * 2}"
@@ -66,6 +70,7 @@ dc.hostFolder.children.first.host.each do |host|
   datadogmetric("memory", "percent_used", host.summary.config.name.downcase, memusedperc, "#{ENV['PCF_TAG']}")
   datadogmetric("memory", "percent_free", host.summary.config.name.downcase, memfreeperc, "#{ENV['PCF_TAG']}")
   puts "posting metrics to datadog completed"
+end
 end
 
 #free space of Datastore (single datastore)
