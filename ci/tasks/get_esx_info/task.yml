@@ -15,6 +15,6 @@ run:
 params:
   params:
     DATADOG_API_KEY:
-    ESX_HOST:
-    ESX_USER:
-    ESX_PASSWORD:
+    SANDBOX_ESX_HOST:
+    SANDBOX_ESX_USER:
+    SANDBOX_ESX_PASSWORD:
